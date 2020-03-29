@@ -56,8 +56,8 @@ const EpisodiesList = () => {
             </ButtonGroup>
           </div>
         </Grid>
-        {episodies.map(item => (
-          <Grid item xs={3}>
+        {episodies.map((item, index) => (
+          <Grid item xs={3} key={index}>
             <EpisodieItem
               title={item.title}
               season={item.season}
