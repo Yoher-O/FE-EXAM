@@ -2,6 +2,7 @@ import * as React from "react";
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import { AppBar, Toolbar } from "@material-ui/core/";
 import "./NavBar.css";
+import EpisodiesList from "../EpisodiesList/episodiesList.component";
 
 const Navbar = () => {
   return (
@@ -21,7 +22,7 @@ const Navbar = () => {
           <h1>Home</h1>
         </Route>
         <Route path="/episodie">
-          <h1>EPISODES</h1>
+          <EpisodiesList />
         </Route>
       </Switch>
     </Router>
