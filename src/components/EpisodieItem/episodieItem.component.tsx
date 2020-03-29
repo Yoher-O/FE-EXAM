@@ -16,6 +16,7 @@ const useStyles = makeStyles({
     "-moz-box-shadow": "10px 10px 44px -8px rgba(0,0,0,0.75)",
     "box-shadow": "10px 10px 44px -8px rgba(0,0,0,0.75)",
     display: "flex",
+    height: 200,
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "center"

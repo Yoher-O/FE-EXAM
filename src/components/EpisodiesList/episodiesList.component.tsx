@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { makeStyles, Grid, ButtonGroup, Button } from "@material-ui/core/";
 import EpisodieItem from "../EpisodieItem/episodieItem.component";
 
@@ -18,26 +19,17 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const EpisodiesList = () => {
+const EpisodiesList = ({ ...props }) => {
   const classes = useStyles();
-  const episodies = [
-    { title: "E1", season: "season 1", air_date: "now" },
-    { title: "E1", season: "season 1", air_date: "now" },
-    { title: "E1", season: "season 1", air_date: "now" },
-    { title: "E1", season: "season 1", air_date: "now" },
-    { title: "E1", season: "season 1", air_date: "now" },
-    { title: "E1", season: "season 1", air_date: "now" },
-    { title: "E1", season: "season 1", air_date: "now" },
-    { title: "E1", season: "season 1", air_date: "now" },
-    { title: "E1", season: "season 1", air_date: "now" },
-    { title: "E1", season: "season 1", air_date: "now" },
-    { title: "E1", season: "season 1", air_date: "now" },
-    { title: "E1", season: "season 1", air_date: "now" }
-  ];
+  const [episodies, setEpisodies] = useState([]);
 
   useEffect(() => {
-    console.log("xx");
+    props.fetchEpisodies();
   }, []);
+
+  useEffect(() => {
+    setEpisodies(props.episodies);
+  }, [props.episodies]);
 
   return (
     <div className={classes.root}>
@@ -57,15 +49,17 @@ const EpisodiesList = () => {
             </ButtonGroup>
           </div>
         </Grid>
-        {episodies.map((item, index) => (
-          <Grid item xs={3} key={index}>
-            <EpisodieItem
-              title={item.title}
-              season={item.season}
-              air_date={item.air_date}
-            />
-          </Grid>
-        ))}
+        {episodies
+          ? episodies.map((item: any, index) => (
+              <Grid item xs={12} sm={4} lg={3} key={index}>
+                <EpisodieItem
+                  title={item.title}
+                  season={item.season}
+                  air_date={item.air_date}
+                />
+              </Grid>
+            ))
+          : ""}
       </Grid>
     </div>
   );
@@ -77,7 +71,6 @@ EpisodiesList.propTypes = {
 };
 
 const mapState = (state: any) => {
-  console.log("mapstate", state);
   return {
     episodies: state.episodies.episodies
   };
@@ -87,4 +80,4 @@ const mapDispatch = (dispatch: any) => ({
   fetchEpisodies: dispatch.episodies.fetchEpisodies
 });
 
-export default EpisodiesList;
+export default connect(mapState, mapDispatch)(EpisodiesList);
