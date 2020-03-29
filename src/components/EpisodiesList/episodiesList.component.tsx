@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { makeStyles, Grid, ButtonGroup, Button } from "@material-ui/core/";
 import EpisodieItem from "../EpisodieItem/episodieItem.component";
 
@@ -69,5 +70,21 @@ const EpisodiesList = () => {
     </div>
   );
 };
+
+EpisodiesList.propTypes = {
+  fetchEpisodies: PropTypes.func,
+  episodies: PropTypes.array
+};
+
+const mapState = (state: any) => {
+  console.log("mapstate", state);
+  return {
+    episodies: state.episodies.episodies
+  };
+};
+
+const mapDispatch = (dispatch: any) => ({
+  fetchEpisodies: dispatch.episodies.fetchEpisodies
+});
 
 export default EpisodiesList;
